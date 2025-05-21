@@ -10,7 +10,19 @@ This repository contains our efforts to replicate the fine-tuning and training e
 We forked the original code from Google Research’s [vision_transformer](https://github.com/google-research/vision_transformer) and added configuration files to run **6 fine-tuning** and **4 training** experiments on CIFAR-10, CIFAR-100, and ImageNet-1K.
 
 ---
+## Repository Structure
+```
 
+├── .github/             ← CI workflows
+├── vit\_jax/             ← JAX implementation
+│   ├── configs/         ← Experiment configs
+│   └── …                ← Source code, data loaders, training scripts
+├── .gitignore
+├── README.md
+└── LICENSE
+
+```
+---
 
 ## Config Files
 
