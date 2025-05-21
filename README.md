@@ -1,4 +1,4 @@
-```markdown
+
 ## MLP-Mixer Reproduction
 
 This repository contains our efforts to replicate the fine-tuning and training experiments of the **MLP-Mixer** architecture from the NeurIPS 2021 paper:
