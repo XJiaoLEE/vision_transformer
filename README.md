@@ -12,10 +12,8 @@ We forked the original code from Google Research’s [vision_transformer](https:
 ---
 
 ## Repository Structure
-
 ```
 
-.
 ├── .github/             ← CI workflows
 ├── vit\_jax/             ← JAX implementation
 │   ├── configs/         ← Experiment configs
@@ -24,7 +22,7 @@ We forked the original code from Google Research’s [vision_transformer](https:
 ├── README.md
 └── LICENSE
 
-````
+```
 
 ---
 
@@ -59,7 +57,7 @@ We provide config files for different experiments. All live under `vit_jax/confi
 - **OS**: Linux  
 - **Python**: 3.8–3.10  
 - **Dependencies**:  
-  ```bash
+```bash
   pip install -r vit_jax/requirements.txt
   pip install tensorflow-datasets jax jaxlib  # for data loading
 ````
@@ -96,6 +94,8 @@ We provide config files for different experiments. All live under `vit_jax/confi
 ## How to Run
 
 Replace `$(pwd)` with your project root if needed.
+
+---
 
 ### Fine-tuning on CIFAR-10
 
@@ -151,6 +151,8 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   > $(pwd)/logs/mixer_l16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
 ```
 
+---
+
 ### Fine-tuning on ImageNet-1K
 
 > **Note**: the paper recommends `base_lr = 0.003` for ImageNet-1K fine-tuning; we observed some instability (accuracy dips around 61 %), likely due to randomness in initialization.
@@ -181,7 +183,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   > $(pwd)/logs/mixer_imagenet_ft/mixer_l16_imagenet_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
 
-
+---
 
 ### Training from Scratch (CIFAR-10)
 
@@ -203,7 +205,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   > $(pwd)/logs/mixer_l16_cifar10_training/mylog.log 2>&1 & disowns
 ```
 
-
+---
 
 ### Training from Scratch (ImageNet-1K)
 
