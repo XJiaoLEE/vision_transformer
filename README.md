@@ -16,7 +16,7 @@ We forked the original code from Google Research’s [vision_transformer](https:
 ├── .github/             ← CI workflows
 ├── vit\_jax/             ← JAX implementation
 │   ├── configs/         ← Experiment configs
-│   └── …                ← Source code, data loaders, training scripts
+│   └── …                ← Requirements, Source code, data loaders, training scripts
 ├── .gitignore
 ├── README.md
 └── LICENSE
