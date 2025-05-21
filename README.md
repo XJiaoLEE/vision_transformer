@@ -11,20 +11,6 @@ We forked the original code from Google Research’s [vision_transformer](https:
 
 ---
 
-## Repository Structure
-```
-
-├── .github/             ← CI workflows
-├── vit\_jax/             ← JAX implementation
-│   ├── configs/         ← Experiment configs
-│   └── …                ← Source code, data loaders, training scripts
-├── .gitignore
-├── README.md
-└── LICENSE
-
-```
-
----
 
 ## Config Files
 
@@ -57,10 +43,11 @@ We provide config files for different experiments. All live under `vit_jax/confi
 - **OS**: Linux  
 - **Python**: 3.8–3.10  
 - **Dependencies**:  
+
 ```bash
   pip install -r vit_jax/requirements.txt
   pip install tensorflow-datasets jax jaxlib  # for data loading
-````
+```
 
 ---
 
