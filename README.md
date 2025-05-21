@@ -1,5 +1,5 @@
 ```markdown
-# MLP-Mixer Reproduction
+## MLP-Mixer Reproduction
 
 This repository contains our efforts to replicate the fine-tuning and training experiments of the **MLP-Mixer** architecture from the NeurIPS 2021 paper:
 
@@ -16,7 +16,7 @@ We forked the original code from Google Research’s [vision_transformer](https:
 
 We provide config files for different experiments. All live under `vit_jax/configs/`.
 
-### Fine-tuning (pretrained → downstream)
+## Fine-tuning (pretrained → downstream)
 
 | Dataset   | Model      | Config file                                    |
 |:---------:|:-----------|:-----------------------------------------------|
@@ -26,7 +26,7 @@ We provide config files for different experiments. All live under `vit_jax/confi
 | ImageNet-1K | Mixer-B/16 | `mixer_base16_imagenet1k.py`                  |
 | ImageNet-1K | Mixer-L/16 | `mixer_large16_imagenet1k.py`                 |
 
-### Training from scratch (no pretraining)
+## Training from scratch (no pretraining)
 
 | Dataset    | Model      | Config file                                           |
 |:----------:|:-----------|:------------------------------------------------------|
@@ -44,10 +44,10 @@ We provide config files for different experiments. All live under `vit_jax/confi
 - **Python**: 3.8–3.10  
 - **Dependencies**:  
 
-```bash
-  pip install -r vit_jax/requirements.txt
-  pip install tensorflow-datasets jax jaxlib  # for data loading
-```
+  ```bash
+    pip install -r vit_jax/requirements.txt
+    pip install tensorflow-datasets jax jaxlib  # for data loading
+  ```
 
 ---
 
