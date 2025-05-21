@@ -331,6 +331,21 @@ def get_r50_l32_config():
 # Mixers
 ########
 
+#Xinjiao: newly added mixer s16 config based on the paper
+#Xinjiao: 论文表1的隐藏维度 C=512, 层数=8, Token-mixing MLP宽度 D_S=256, Channel-mixing MLP宽度 D_C=2048
+@_register
+def get_mixer_s16_config():
+  """Returns Mixer-S/16 configuration (custom added)."""
+  config = ml_collections.ConfigDict()
+  config.model_name = 'Mixer-S_16'
+  config.patches = ml_collections.ConfigDict({'size': (16, 16)})
+  config.hidden_dim = 512          # 论文表1的隐藏维度 C=512
+  config.num_blocks = 8            # 论文表1的层数
+  config.tokens_mlp_dim = 256      # Token-mixing MLP宽度 D_S=256
+  config.channels_mlp_dim = 2048   # Channel-mixing MLP宽度 D_C=2048
+  return config
+
+
 
 @_register
 def get_mixer_b16_config():

@@ -11,7 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import jax
+from jax import tree_util
 
+# 1⃣ 让 jax.tree.map 生效
+jax.tree       = tree_util
+jax.tree.map   = tree_util.tree_map
+
+# 2⃣ 还要让 jax.tree.leaves 生效
+jax.tree.leaves = tree_util.tree_leaves
+
+# 3⃣ 保留旧的 API 兼容
+jax.tree_map   = tree_util.tree_map
 from absl import app
 from absl import flags
 from absl import logging

@@ -19,16 +19,13 @@ from vit_jax.configs import models
 
 
 def get_config():
-  """Returns config for training Mixer-B/16 on cifar10."""
+  """Returns config for training Mixer-B/16 on cifar100."""
   config = common.get_config()
   config.unlock()
   config.model_type = 'Mixer'
   config.model = models.get_mixer_b16_config()
-  config.dataset = 'cifar10'
+  config.dataset = 'cifar100'
   config.total_steps = 10_000
-  # config.total_steps = 1000
-  # config.warmup_steps = 100
-
   config.pp = ml_collections.ConfigDict(
       {'train': 'train[:98%]', 'test': 'test', 'crop': 224})
   return config

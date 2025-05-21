@@ -21,6 +21,7 @@ import jax
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from jax import tree_util
 
 import sys
 if sys.platform != 'darwin':
@@ -46,8 +47,29 @@ def get_tfds_info(dataset, split):
 
 def get_directory_info(directory):
   """Returns information about directory dataset -- see `get_dataset_info()`."""
-  examples_glob = f'{directory}/*/*.jpg'
-  paths = glob.glob(examples_glob)
+  # examples_glob = f'{directory}/*/*.jpg'
+  # paths = glob.glob(examples_glob)
+  #------------------change to ------------------
+  patterns = [
+    f"{directory}/*/*.{ext}"
+    for ext in ("jpg","JPG","jpeg","JPEG")
+  ]
+  # 收集所有匹配到的文件
+  paths = []
+  for p in patterns:
+    paths.extend(glob.glob(p))
+  # 然后把 examples_glob 设置为这些模式
+  examples_glob = patterns
+  # patterns = [
+  #   f'{directory}/*/*.[jJ][pP][gG]',
+  #   f'{directory}/*/*.[jJ][pP][eE][gG]',
+  # ]
+  # paths = []
+  # for pat in patterns:
+  #   paths += glob.glob(pat)
+  # if not paths:
+  #   raise ValueError(f"No files matched patterns: {patterns}")
+  #---------------------------------------------
   get_classname = lambda path: path.split('/')[-2]
   class_names = sorted(set(map(get_classname, paths)))
   return dict(
@@ -243,7 +265,7 @@ def get_data(*,
 def prefetch(dataset, n_prefetch):
   """Prefetches data to device and converts to numpy array."""
   ds_iter = iter(dataset)
-  ds_iter = map(lambda x: jax.tree.map(lambda t: np.asarray(memoryview(t)), x),
+  ds_iter = map(lambda x: jax.tree_map(lambda t: np.asarray(memoryview(t)), x),
                 ds_iter)
   if n_prefetch:
     ds_iter = flax.jax_utils.prefetch_to_device(ds_iter, n_prefetch)

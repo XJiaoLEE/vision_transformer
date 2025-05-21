@@ -20,6 +20,7 @@ from absl import logging
 from clu import metric_writers
 from clu import periodic_actions
 import flax
+from jax import tree_util
 from flax.training import checkpoints as flax_checkpoints
 import jax
 import jax.numpy as jnp
@@ -60,7 +61,7 @@ def make_update_fn(*, apply_fn, accum_steps, tx):
     l, g = utils.accumulate_gradient(
         jax.value_and_grad(loss_fn), params, batch['image'], batch['label'],
         accum_steps)
-    g = jax.tree.map(lambda x: jax.lax.pmean(x, axis_name='batch'), g)
+    g = jax.tree_map(lambda x: jax.lax.pmean(x, axis_name='batch'), g)
     updates, opt_state = tx.update(g, opt_state)
     params = optax.apply_updates(params, updates)
     l = jax.lax.pmean(l, axis_name='batch')

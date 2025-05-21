@@ -14,7 +14,7 @@
 
 import os
 import tempfile
-
+import glob
 from absl.testing import absltest
 from absl.testing import parameterized
 import ml_collections
@@ -62,7 +62,22 @@ class TrainTest(parameterized.TestCase):
         for mode in ('train', 'test'):
           for class_name in ('test1', 'test2'):
             for i in range(8):
-              path = os.path.join(config.dataset, mode, class_name, f'{i}.jpg')
+              # path = os.path.join(config.dataset, mode, class_name, f'{i}.jp*g')
+              #------------------change to --------------
+              # 同时匹配 .jpg/.jpeg，大小写都行
+              path_patterns = [
+                  os.path.join(config.dataset, mode, class_name, f'{i}.[jJ][pP][gG]'),
+                  os.path.join(config.dataset, mode, class_name, f'{i}.[jJ][pP][eE][gG]'),
+              ]
+              # 然后取第一个能 match 到的
+              for pat in path_patterns:
+                  matches = glob.glob(pat)
+                  if matches:
+                      path = matches[0]
+                      break
+              else:
+                  raise FileNotFoundError(f"No image for class={class_name}, idx={i}") 
+              #-------------------------------------------
               os.makedirs(os.path.dirname(path), exist_ok=True)
               with open(path, 'wb') as f:
                 f.write(JPG_BLACK_1PX)

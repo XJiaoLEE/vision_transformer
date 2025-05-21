@@ -25,10 +25,16 @@ def get_config():
   config.model_type = 'Mixer'
   config.model = models.get_mixer_b16_config()
   config.dataset = 'cifar10'
-  config.total_steps = 10_000
-  # config.total_steps = 1000
-  # config.warmup_steps = 100
+  # Training Steps (Adjusted for ImageNet-1k)
+  config.total_steps = 300_000          # ≈300 epochs (1.28M images / batch=512 → 2500 steps/epoch)
+  config.warmup_steps = 10_000          # 论文正文3.1节
+
+  config.base_lr = 0.001                # 从头训练学习率较低（论文未明确，参考ViT惯例）
+  config.pretrained_dir = None
+  config.model_or_filename = None
 
   config.pp = ml_collections.ConfigDict(
       {'train': 'train[:98%]', 'test': 'test', 'crop': 224})
+  
+  config.accum_steps = 1         # 从头训练建议禁用累积
   return config

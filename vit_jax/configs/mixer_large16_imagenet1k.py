@@ -23,12 +23,13 @@ def get_config():
   config = common.get_config()
   config.unlock()
   config.model_type = 'Mixer'
-  config.model = models.get_mixer_b16_config()
-  config.dataset = 'cifar10'
-  config.total_steps = 10_000
-  # config.total_steps = 1000
-  # config.warmup_steps = 100
+  config.model = models.get_mixer_l16_config()
+  config.dataset = 'imagenet2012'
+  # Training Steps (Adjusted for ImageNet-1k)
+  config.total_steps = 125_000  # ≈50 epochs for ImageNet-1k (1.28M images / batch=510)
+  config.warmup_steps = 12_500  # 10% of total_steps (ViT convention)
+  config.base_lr = 0.003
 
   config.pp = ml_collections.ConfigDict(
-      {'train': 'train[:98%]', 'test': 'test', 'crop': 224})
+      {'train': 'train[:100%]', 'test': 'test', 'crop': 224})
   return config
