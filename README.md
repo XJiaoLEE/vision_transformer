@@ -30,13 +30,15 @@ We provide config files for different experiments. All live under `vit_jax/confi
 
 ## Fine-tuning (pretrained → downstream)
 
-| Dataset   | Model      | Config file                                    |
-|:---------:|:-----------|:-----------------------------------------------|
-| CIFAR-10  | Mixer-B/16 | `mixer_base16_cifar10.py`                      |
-| CIFAR-10  | Mixer-L/16 | `mixer_large16_cifar10.py`                     |
-| CIFAR-100 | Mixer-B/16 | `mixer_base16_cifar100.py`                     |
-| ImageNet-1K | Mixer-B/16 | `mixer_base16_imagenet1k.py`                  |
-| ImageNet-1K | Mixer-L/16 | `mixer_large16_imagenet1k.py`                 |
+| Pretraining Dataset       | Dataset     | Model      | Config file                               |
+|:-------------------------:|:-----------:|:----------:|:------------------------------------------|
+| ImageNet-21k / ImageNet-1k | CIFAR-10    | Mixer-B/16 | `mixer_base16_cifar10.py`                 |
+| ImageNet-21k / ImageNet-1k | CIFAR-10    | Mixer-L/16 | `mixer_large16_cifar10.py`                |
+| ImageNet-21k               | CIFAR-100   | Mixer-B/16 | `mixer_base16_cifar100.py`                |
+| ImageNet-21k               | ImageNet-1K | Mixer-B/16 | `mixer_base16_imagenet1k.py`              |
+| ImageNet-21k               | ImageNet-1K | Mixer-L/16 | `mixer_large16_imagenet1k.py`             |
+
+
 
 ## Training from scratch (no pretraining)
 
