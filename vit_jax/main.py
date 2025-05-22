@@ -11,18 +11,40 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# import jax
+# from jax import tree_util
+
+# # 1⃣ 让 jax.tree.map 生效
+# jax.tree       = tree_util
+# jax.tree.map   = tree_util.tree_map
+
+# # 2⃣ 还要让 jax.tree.leaves 生效
+# jax.tree.leaves = tree_util.tree_leaves
+
+# # 3⃣ 保留旧的 API 兼容
+# jax.tree_map   = tree_util.tree_map
+# vit_jax/main.py (务必最前面就写)
 import jax
 from jax import tree_util
 
-# 1⃣ 让 jax.tree.map 生效
-jax.tree       = tree_util
-jax.tree.map   = tree_util.tree_map
+# 1) 让 jax.tree 指向 tree_util 模块
+jax.tree = tree_util
 
-# 2⃣ 还要让 jax.tree.leaves 生效
-jax.tree.leaves = tree_util.tree_leaves
+# 2) 把常用 API 都补齐到 jax.tree 下
+jax.tree.map        = tree_util.tree_map
+jax.tree.flatten    = tree_util.tree_flatten
+jax.tree.unflatten  = tree_util.tree_unflatten
+jax.tree.leaves     = tree_util.tree_leaves
+jax.tree.structure  = tree_util.tree_structure
 
-# 3⃣ 保留旧的 API 兼容
-jax.tree_map   = tree_util.tree_map
+# 3) 为了保险，也给这几个顶层别名
+jax.tree_map       = tree_util.tree_map
+jax.tree_flatten   = tree_util.tree_flatten
+jax.tree_unflatten = tree_util.tree_unflatten
+jax.tree_leaves    = tree_util.tree_leaves
+jax.tree_structure = tree_util.tree_structure
+
+
 from absl import app
 from absl import flags
 from absl import logging

@@ -103,12 +103,13 @@ Replace `$(pwd)` with your project root if needed.
 ```bash
 #  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_b16, category: logs/mixer_b16_cifar10_ft_3gpu
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_b16_cifar10_ft_3gpu" \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_imagenet21k" \
   --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10.py" \
   --config.pretrained_dir="gs://mixer_models/imagenet21k" \
   --config.batch=510 \
   --config.batch_eval=510\
-  --config.accum_steps=5
+  --config.accum_steps=5\
+  > $(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
 
 
@@ -116,26 +117,26 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 ```bash
 #  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_l16_cifar10_ft_3gpu" \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k" \
   --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10.py" \
   --config.pretrained_dir="gs://mixer_models/imagenet21k" \
   --config.batch=510 \
   --config.batch_eval=510\
   --config.accum_steps=5\
-  > $(pwd)/logs/mixer_l16_cifar10_ft_3gpu/mylog.log 2>&1 & disown
+  > $(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
 
 
 ```bash
 #  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_b16, category: logs/mixer_b16_cifar10_ft_3gpu_up_imagenet
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_b16_cifar10_ft_3gpu_up_imagenet" \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_up_imagenet" \
   --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10.py" \
   --config.pretrained_dir="gs://mixer_models/imagenet1k" \
   --config.batch=510 \
   --config.batch_eval=510\
   --config.accum_steps=5\
-  > $(pwd)/logs/mixer_b16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
+  > $(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
 ```
 
 
@@ -143,13 +144,13 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 #  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu_up_imagenet
 L16 cifar10----imagenet
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_l16_cifar10_ft_3gpu_up_imagenet" \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_up_imagenet" \
   --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10.py" \
   --config.pretrained_dir="gs://mixer_models/imagenet1k" \
   --config.batch=510 \
   --config.batch_eval=510\
   --config.accum_steps=5\
-  > $(pwd)/logs/mixer_l16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
+  > $(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
 ```
 
 ---

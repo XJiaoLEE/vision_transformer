@@ -28,7 +28,7 @@ def get_config():
   # Training Steps (Adjusted for ImageNet-1k)
   config.total_steps = 125_000  # ≈50 epochs for ImageNet-1k (1.28M images / batch=510)
   config.warmup_steps = 12_500  # 10% of total_steps (ViT convention)
-  config.base_lr = 0.003
+  config.base_lr = 0.001
 
   config.pp = ml_collections.ConfigDict(
       {'train': 'train[:100%]', 'test': 'test', 'crop': 224})
