@@ -7,7 +7,7 @@ This repository contains our efforts to replicate the fine-tuning and training e
 > Tolstikhin *et al.*, NeurIPS 2021  
 > https://proceedings.neurips.cc/paper/2021/hash/cba0a4ee5ccd02fda0fe3f9a3e7b89fe-Abstract.html
 
-We forked the original code from Google Research’s [vision_transformer](https://github.com/google-research/vision_transformer) and added configuration files to run **6 fine-tuning** and **4 training** experiments on CIFAR-10, CIFAR-100, and ImageNet-1K.
+We forked the original code from Google Research’s [vision_transformer](https://github.com/google-research/vision_transformer) and added configuration files to run **9 fine-tuning**  experiments on CIFAR-10 and ImageNet-1K.
 
 ---
 ## Repository Structure
@@ -118,7 +118,7 @@ OR
 #  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k
   CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k" \
-  --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet21k.py.py" \
+  --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet21k.py" \
   --config.pretrained_dir="$(pwd)/pretrained"\
   --config.batch=120 \
   --config.batch_eval=120 \
@@ -173,13 +173,13 @@ OR
 #  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_b16, category: logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet
 L16 cifar10----imagenet
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet" \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet" \
   --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet1k.py" \
   --config.pretrained_dir="$(pwd)/pretrained"\
   --config.batch=120 \
   --config.batch_eval=120\
   --config.accum_steps=4\
-  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet/mylog.log 2>&1 & disown
 ```
 
 
@@ -338,15 +338,15 @@ upstream     | model      | dataset | top-1 accuracy |
 :----------- | :--------- | :------ | -------------: | 
 ImageNet-21k | Mixer-L/16 | cifar10 | 98.25%         | logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k
 
-### We did this experiment because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy.
+### We did the upper experiment because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy.
 
 batchsize=120*4=480
 total_steps=1000
 upstream     | model      | dataset | top-1 accuracy | 
 :----------- | :--------- | :------ | -------------: | 
-ImageNet     | Mixer-B/16 | cifar10 | 96.72%         | logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet
+ImageNet     | Mixer-B/16 | cifar10 | 94.78%         |√logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet
 ImageNet     | Mixer-L/16 | cifar10 | 95.79%         |√logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet
-ImageNet-21k | Mixer-B/16 | cifar10 | 96.82%         | logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-B/16 | cifar10 | 96.44%         |√logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k
 ImageNet-21k | Mixer-L/16 | cifar10 | 98.18%         |√logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k
 
 ---
@@ -382,8 +382,8 @@ batchsize=120*4=480
 total_steps=50000
 upstream     | model      | dataset     | top-1 accuracy | 
 :----------- | :--------- | :---------- | -------------: | 
-ImageNet-21k | Mixer-B/16 | ImageNet-1k | 78.44%         |? logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
-ImageNet-21k | Mixer-L/16 | ImageNet-1k | 78.44%         |? logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 77.51%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 79.53%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
 
 ---
 
