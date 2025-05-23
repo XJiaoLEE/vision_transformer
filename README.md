@@ -115,7 +115,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 ```
 OR
 ```bash
-#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
+#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k
   CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k" \
   --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet21k.py.py" \
@@ -143,7 +143,7 @@ OR
 ```
 OR
 ```bash
-#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
+#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k
   CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k" \
   --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10-imagenet21k.py.py" \
@@ -170,7 +170,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 ```
 OR
 ```bash
-#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu_up_imagenet
+#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_b16, category: logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet
 L16 cifar10----imagenet
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet" \
@@ -198,7 +198,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 ```
 OR
 ```bash
-#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu_up_imagenet
+#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet
 L16 cifar10----imagenet
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet" \
@@ -231,7 +231,7 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 ```
 OR
 ```bash
-#  Dataset: imagenet1k, Pretrain:imagenet21k, Model: mider_b16, category: logs/mixer_b16_imagenet_ft_3gpu_imagenet21k
+#  Dataset: imagenet1k, Pretrain:imagenet21k, Model: mider_b16, category: logs/mixer_imagenet_ft_btsize510/mixer_b16_imagenet_ft_3gpu_imagenet21k
 CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --workdir="$(pwd)/logs/mixer_imagenet_ft_btsize510/mixer_b16_imagenet_ft_3gpu_imagenet21k" \
   --config="$(pwd)/vit_jax/configs/mixer_base16_imagenet1k_imagenet21k.py" \
@@ -256,6 +256,19 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --config.batch_eval=510\
   --config.accum_steps=5\
   > $(pwd)/logs/mixer_imagenet_ft/mixer_l16_imagenet_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
+```
+OR
+```bash
+#  Dataset: imagenet1k, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_imagenet_ft_btsize510/mixer_l16_imagenet_ft_3gpu_imagenet21k
+CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_imagenet_ft_btsize510/mixer_l16_imagenet_ft_3gpu_imagenet21k" \
+  --config="$(pwd)/vit_jax/configs/mixer_large16_imagenet1k_imagenet21k.py" \
+  --config.dataset="/home/dddddddd/tensorflow_datasets/imagenet" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120\
+  --config.accum_steps=4\
+  > $(pwd)/logs/mixer_imagenet_ft_btsize510/mixer_l16_imagenet_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
 
 ---
