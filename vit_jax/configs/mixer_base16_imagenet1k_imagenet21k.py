@@ -27,9 +27,9 @@ def get_config():
   config.dataset = 'imagenet2012'
   config.model_or_filename="imagenet21k_Mixer-B_16"
   # Training Steps (Adjusted for ImageNet-1k)
-  config.total_steps = 125_000  # ≈50 epochs for ImageNet-1k (1.28M images / batch=510)
-  config.warmup_steps = 12_500  # 10% of total_steps (ViT convention)
-  config.base_lr = 0.001
+  config.total_steps = 50000  # ≈50 epochs for ImageNet-1k (1.28M images / batch=510)
+  config.warmup_steps = 5000  # 10% of total_steps (ViT convention)
+  config.base_lr = 0.003
 
   config.pp = ml_collections.ConfigDict(
       {'train': 'train[:100%]', 'test': 'test', 'crop': 224})

@@ -32,11 +32,13 @@ We provide config files for different experiments. All live under `vit_jax/confi
 
 | Pretraining Dataset       | Dataset     | Model      | Config file                               |
 |:-------------------------:|:-----------:|:----------:|:------------------------------------------|
-| ImageNet-21k / ImageNet-1k | CIFAR-10    | Mixer-B/16 | `mixer_base16_cifar10.py`                 |
-| ImageNet-21k / ImageNet-1k | CIFAR-10    | Mixer-L/16 | `mixer_large16_cifar10.py`                |
-| ImageNet-21k               | CIFAR-100   | Mixer-B/16 | `mixer_base16_cifar100.py`                |
-| ImageNet-21k               | ImageNet-1K | Mixer-B/16 | `mixer_base16_imagenet1k.py`              |
-| ImageNet-21k               | ImageNet-1K | Mixer-L/16 | `mixer_large16_imagenet1k.py`             |
+| ImageNet-1k               | CIFAR-10    | Mixer-B/16 | `mixer_base16_cifar10_imagenet1k.py`                 |
+| ImageNet-1k               | CIFAR-10    | Mixer-L/16 | `mixer_large16_cifar10_imagenet1k.py`                |
+| ImageNet-21k              | CIFAR-10    | Mixer-B/16 | `mixer_base16_cifar10_imagenet21k.py`                 |
+| ImageNet-21k              | CIFAR-10    | Mixer-L/16 | `mixer_large16_cifar10_imagenet21k.py`                |
+| ImageNet-21k              | CIFAR-100   | Mixer-B/16 | `mixer_base16_cifar100.py`                |
+| ImageNet-21k              | ImageNet-1K | Mixer-B/16 | `mixer_base16_imagenet1k_imagenet21k.py`              |
+| ImageNet-21k              | ImageNet-1K | Mixer-L/16 | `mixer_large16_imagenet1k_imagenet21k.py`             |
 
 
 
@@ -111,20 +113,48 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --config.accum_steps=5\
   > $(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
+OR
+```bash
+#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
+  CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k" \
+  --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet21k.py.py" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120 \
+  --config.accum_steps=4 \
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
+```
+
+
 
 
 
 ```bash
 #  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
-CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
-  --workdir="$(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k" \
-  --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10.py" \
+  CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k" \
+  --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10-imagenet21k.py" \
   --config.pretrained_dir="gs://mixer_models/imagenet21k" \
-  --config.batch=510 \
-  --config.batch_eval=510\
-  --config.accum_steps=5\
-  > $(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
+  --config.batch=120 \
+  --config.batch_eval=120 \
+  --config.accum_steps=4 \
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
+OR
+```bash
+#  Dataset: CIFAR10, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu
+  CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k" \
+  --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10-imagenet21k.py.py" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120 \
+  --config.accum_steps=4 \
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
+```
+
+
 
 
 ```bash
@@ -138,6 +168,20 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --config.accum_steps=5\
   > $(pwd)/logs/mixer_cifar10_ft/mixer_b16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
 ```
+OR
+```bash
+#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu_up_imagenet
+L16 cifar10----imagenet
+CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet" \
+  --config="$(pwd)/vit_jax/configs/mixer_base16_cifar10-imagenet1k.py" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120\
+  --config.accum_steps=4\
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
+```
+
 
 
 ```bash
@@ -152,6 +196,20 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --config.accum_steps=5\
   > $(pwd)/logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
 ```
+OR
+```bash
+#  Dataset: CIFAR10, Pretrain:imagenet1k, Model: mider_l16, category: logs/mixer_l16_cifar10_ft_3gpu_up_imagenet
+L16 cifar10----imagenet
+CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet" \
+  --config="$(pwd)/vit_jax/configs/mixer_large16_cifar10-imagenet1k.py" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120\
+  --config.accum_steps=4\
+  > $(pwd)/logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet/mylog.log 2>&1 & disown
+```
+
 
 ---
 
@@ -171,6 +229,21 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
   --config.accum_steps=5\
   > $(pwd)/logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
 ```
+OR
+```bash
+#  Dataset: imagenet1k, Pretrain:imagenet21k, Model: mider_b16, category: logs/mixer_b16_imagenet_ft_3gpu_imagenet21k
+CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
+  --workdir="$(pwd)/logs/mixer_imagenet_ft_btsize510/mixer_b16_imagenet_ft_3gpu_imagenet21k" \
+  --config="$(pwd)/vit_jax/configs/mixer_base16_imagenet1k_imagenet21k.py" \
+  --config.dataset="/home/dddddddd/tensorflow_datasets/imagenet" \
+  --config.pretrained_dir="$(pwd)/pretrained"\
+  --config.batch=120 \
+  --config.batch_eval=120\
+  --config.accum_steps=4\
+  > $(pwd)/logs/mixer_imagenet_ft_btsize510/mixer_b16_imagenet_ft_3gpu_imagenet21k/mylog.log 2>&1 & disown
+```
+
+
 
 ```bash
 #  Dataset: imagenet1k, Pretrain:imagenet21k, Model: mider_l16, category: logs/mixer_l16_imagenet_ft_3gpu_imagenet21k
@@ -234,25 +307,70 @@ CUDA_VISIBLE_DEVICES=0,1,2 python3 -m vit_jax.main \
 
 ---
 
-## Expected Results from the Paper
+## Expected Results of CIFAR10 from the Paper
+batchsize=512
+total_steps=1000
+upstream     | model      | dataset | top-1 accuracy |
+:----------- | :--------- | :------ | -------------: |
+ImageNet     | Mixer-B/16 | cifar10 | 96.72%         |
+ImageNet     | Mixer-L/16 | cifar10 | 96.59%         |
+ImageNet-21k | Mixer-B/16 | cifar10 | 96.82%         |
+ImageNet-21k | Mixer-L/16 | cifar10 | 98.34%         |
 
-upstream     | model      | dataset | accuracy | wall_clock_time | link
-:----------- | :--------- | :------ | -------: | :-------------- | :---
-ImageNet     | Mixer-B/16 | cifar10 | 96.72%   | 3.0h            | [tensorboard.dev](https://tensorboard.dev/experiment/j9zCYt9yQVm93nqnsDZayA/)
-ImageNet     | Mixer-L/16 | cifar10 | 96.59%   | 3.0h            | [tensorboard.dev](https://tensorboard.dev/experiment/Q4feeErzRGGop5XzAvYj2g/)
-ImageNet-21k | Mixer-B/16 | cifar10 | 96.82%   | 9.6h            | [tensorboard.dev](https://tensorboard.dev/experiment/mvP4McV2SEGFeIww20ie5Q/)
-ImageNet-21k | Mixer-L/16 | cifar10 | 98.34%   | 10.0h           | [tensorboard.dev](https://tensorboard.dev/experiment/dolAJyQYTYmudytjalF6Jg/)
+
+## Our Results
+batchsize=510*5=2550
+total_steps=10000
+upstream     | model      | dataset | top-1 accuracy | 
+:----------- | :--------- | :------ | -------------: | 
+ImageNet-21k | Mixer-L/16 | cifar10 | 98.25%         | logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k
+
+### We did this experiment because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy.
+
+batchsize=120*4=480
+total_steps=1000
+upstream     | model      | dataset | top-1 accuracy | 
+:----------- | :--------- | :------ | -------------: | 
+ImageNet     | Mixer-B/16 | cifar10 | 96.72%         | logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet
+ImageNet     | Mixer-L/16 | cifar10 | 95.79%         |√logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_up_imagenet
+ImageNet-21k | Mixer-B/16 | cifar10 | 96.82%         | logs/mixer_cifar10_ft_btsize510/mixer_b16_cifar10_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | cifar10 | 98.18%         |√logs/mixer_cifar10_ft_btsize510/mixer_l16_cifar10_ft_3gpu_imagenet21k
+
+---
+
+## Expected Results of ImageNet-1k from the Paper
+
+batchsize=512
+total_steps=125000
+upstream     | model      | dataset     | top-1 accuracy | 
+:----------- | :--------- | :---------- | -------------: | 
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 80.64%         |
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 82.89%         |
 
 
 ## Our Results
 
-upstream     | model      | dataset | accuracy | wall_clock_time | link
-:----------- | :--------- | :------ | -------: | :-------------- | :---
-ImageNet     | Mixer-B/16 | cifar10 | 96.72%   | 3.0h            | [tensorboard.dev](https://tensorboard.dev/experiment/j9zCYt9yQVm93nqnsDZayA/)
-ImageNet     | Mixer-L/16 | cifar10 | 96.59%   | 3.0h            | [tensorboard.dev](https://tensorboard.dev/experiment/Q4feeErzRGGop5XzAvYj2g/)
-ImageNet-21k | Mixer-B/16 | cifar10 | 96.82%   | 9.6h            | [tensorboard.dev](https://tensorboard.dev/experiment/mvP4McV2SEGFeIww20ie5Q/)
-ImageNet-21k | Mixer-L/16 | cifar10 | 98.34%   | 10.0h           | [tensorboard.dev](https://tensorboard.dev/experiment/dolAJyQYTYmudytjalF6Jg/)
+batchsize=510*5=2550
+total_steps=125000
+upstream     | model      | dataset     | top-1 accuracy | 
+:----------- | :--------- | :---------- | -------------: | 
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 78.44%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
 
+
+batchsize=510*5=2550
+total_steps=35000
+upstream     | model      | dataset     | top-1 accuracy | 
+:----------- | :--------- | :---------- | -------------: | 
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 81.74%         | logs/mixer_imagenet_ft/mixer_l16_imagenet_ft_3gpu_imagenet21k
+
+### We did the upper 2 experiments because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy, but lower than that in the paper.
+
+batchsize=120*4=480
+total_steps=50000
+upstream     | model      | dataset     | top-1 accuracy | 
+:----------- | :--------- | :---------- | -------------: | 
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 78.44%         |? logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 78.44%         |? logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
 
 ---
 
