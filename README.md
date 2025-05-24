@@ -336,7 +336,7 @@ batchsize=510*5=2550
 total_steps=10000
 upstream     | model      | dataset | top-1 accuracy | 
 :----------- | :--------- | :------ | -------------: | 
-ImageNet-21k | Mixer-L/16 | cifar10 | 98.25%         | logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | cifar10 | 98.29%         | logs/mixer_cifar10_ft/mixer_l16_cifar10_ft_3gpu_imagenet21k
 
 ### We did the upper experiment because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy.
 
@@ -367,14 +367,14 @@ batchsize=510*5=2550
 total_steps=125000
 upstream     | model      | dataset     | top-1 accuracy | 
 :----------- | :--------- | :---------- | -------------: | 
-ImageNet-21k | Mixer-B/16 | ImageNet-1k | 78.44%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 78.47%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
 
 
 batchsize=510*5=2550
 total_steps=35000
 upstream     | model      | dataset     | top-1 accuracy | 
 :----------- | :--------- | :---------- | -------------: | 
-ImageNet-21k | Mixer-L/16 | ImageNet-1k | 81.74%         | logs/mixer_imagenet_ft/mixer_l16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 81.84%         | logs/mixer_imagenet_ft/mixer_l16_imagenet_ft_3gpu_imagenet21k
 
 ### We did the upper 2 experiments because the 1:1 comparason below gets lower accuracy than that in the paper. We find that longer total_steps may get limited higher test accuracy, but lower than that in the paper.
 
@@ -382,8 +382,8 @@ batchsize=120*4=480
 total_steps=50000
 upstream     | model      | dataset     | top-1 accuracy | 
 :----------- | :--------- | :---------- | -------------: | 
-ImageNet-21k | Mixer-B/16 | ImageNet-1k | 77.51%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
-ImageNet-21k | Mixer-L/16 | ImageNet-1k | 79.53%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-B/16 | ImageNet-1k | 77.57%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
+ImageNet-21k | Mixer-L/16 | ImageNet-1k | 81.44%         | logs/mixer_imagenet_ft/mixer_b16_imagenet_ft_3gpu_imagenet21k
 
 ---
 
